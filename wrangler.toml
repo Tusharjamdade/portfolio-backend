@@ -1,0 +1,26 @@
+name = "portfolio-backend"
+compatibility_date = "2024-08-01"
+
+[vars]
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZWFlZTI2ODItNWZhZS00NWVjLTkyNTQtMzA2ODViMTc3ZjA2IiwidGVuYW50X2lkIjoiNzI5NjM1MDBmZmE2NTE2NTQ0NTczNjEyYjkwNGNhOGI2Njc5MzlmZjNhN2M3ZmVhM2VjNDcwMzk1OWQwYWNlMiIsImludGVybmFsX3NlY3JldCI6IjI2ZjQ2ZGZiLWQ5YzktNDU2Zi1hODY1LWRiYzE5NDAwYTNiZCJ9.lokhNqLc-SOL4SfunaiFGHkcEEaSHQO-8mAVU91hdLY"
+
+GOOGLE_KEY="AIzaSyAPDV0ILVEzR5n3oIMgDlJu43-BHbYu7HU"
+
+# [vars]
+# MY_VAR = "my-variable"
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "my-database"
+# database_id = ""
+
+# [ai]
+# binding = "AI"
