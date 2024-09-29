@@ -32,3 +32,7 @@ model PdfDocument {
   name   String
   data   Bytes  
 }
+model Views{
+  id Int @id @default(autoincrement())
+  views Int
+}

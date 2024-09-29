@@ -7,6 +7,7 @@ import { cors } from 'hono/cors';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 // import { env } from 'hono/adapter';
 import { env, getRuntimeKey } from 'hono/adapter'
+import { date, z } from 'zod';
 // import { json } from 'hono';
 
 
@@ -189,4 +190,61 @@ app.post('/api', async (c) => {
     return c.json({ error: "Failed to generate content" }, { status: 500 });
   }
 });
+const viewsInput = z.object({
+  views:z.number()
+})
+app.post("/views",async (c)=>{
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+  const body = await c.req.json()
+  const response = viewsInput.safeParse(body)
+  if(!response.success){
+    return c.json({
+      msg:"Invalid Inputs"
+    })
+  }
+  
+  console.log(body)
+  try {
+   
+    const res = await prisma.views.update({
+      where: {
+        id:1
+      },
+      data: {
+        views:response.data.views
+      },
+    })
+  } catch (error) {
+    
+  }
+  return c.json({
+    msg:"Done",
+    
+  })
+})
+app.get("/refresh",async (c)=>{
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+  try {
+    const views = await prisma.views.findUnique({
+      where: {
+       id:1
+      },
+    })
+    const comments = await prisma.comments.findMany({})
+    const contactme = await prisma.contactme.findMany({})
+    const commentsLenght = comments.length
+    const contactmeLenght = contactme.length
+    const viewsNumber = views.views
+    return c.json({
+      viewsNumber,commentsLenght,contactmeLenght
+    })
+
+  } catch (error) {
+    
+  }
+})
 export default app;
