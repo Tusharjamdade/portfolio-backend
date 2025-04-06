@@ -179,7 +179,32 @@ app.post('/api', async (c) => {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     // Prepare the prompt and generate content
-    const prompt = "reply in 2 lines, " + body.search;
+    // const prompt = "reply in 2 lines, " + body.search;
+    const prompt = `
+    You are an intelligent assistant. Use the following detailed profile about Tushar Jamdade to answer any questions the user may ask:
+    
+    ---
+    Tushar Jamdade is a Computer Science Engineering (Data Science) student at Vishwakarma Institute of Information Technology, Pune. Passionate about software development, AI, and open source, Tushar has worked on various impactful projects. These include:
+    
+    
+    - **NASA Explorer**: Visualized NASA API data and built a Global Warming visualizer.
+    - **Portfolio Website**: Showcasing his education, projects, and skills.
+    - **Ledger AI**: Runner-up at an AI hackathon—built an AI tool to extract ledger data from PDFs and convert it into CSV.
+    - **Chat with PDF**: A ChatGPT-powered chatbot for PDF interaction.
+    - **SmartCampus**: A platform to automate canteen and Xerox services in college.
+    - **TaskBidder**: An online freelancing website helping students with academic tasks.
+    - **Blogify**: A blogging platform similar to Medium, allowing users to post and read blogs.
+    - **PopcornSeats**: An online movie ticket booking platform.
+    - **Attendify**: A face recognition and GPS-based smart attendance system.
+    
+    He is skilled in programming languages like **TypeScript, JavaScript, Python, and C++**, and frameworks such as **React.js, Next.js, Node.js, Express.js, and React Native**. Tushar is also exploring **Machine Learning**, **FastAPI**, and **DevOps** tools like **Docker**, **Kubernetes**, **Git**, and **GitHub**. He is an open-source enthusiast with a strong drive for building innovative and scalable solutions.
+    ---
+    
+    Answer the following user question truthfully and only based on the above profile:
+    Q: ${body.search}. Answer in 2 lines.
+    `;
+    
+
     const result = await model.generateContent(prompt,);
     const text = result.response.text();
 
